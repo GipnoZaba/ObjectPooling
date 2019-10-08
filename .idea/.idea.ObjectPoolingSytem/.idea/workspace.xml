@@ -11,7 +11,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../Patterns/Service Locator/Assets/Scripts/PartOne/DependencyInjector.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TestScript.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ServiceLocating/ServiceLocator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../Patterns/Service Locator/Assets/Scripts/PoolHomework/PooledObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../Patterns/Service Locator/Assets/Scripts/PoolHomework/Pools.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pooling.cs" root0="FORCE_HIGHLIGHTING" />
@@ -104,7 +103,7 @@
       <workItem from="1570430726338" duration="2239000" />
       <workItem from="1570484128144" duration="2521000" />
       <workItem from="1570522963955" duration="9844000" />
-      <workItem from="1570540728227" duration="318000" />
+      <workItem from="1570540728227" duration="905000" />
     </task>
     <servers />
   </component>
