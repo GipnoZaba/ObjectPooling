@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
 
 namespace ObjectPooling
 {
     public abstract class Pool
     {
-        protected int _lastUnusedObjectIndex;
+        protected int _firstUnusedObjectIndex;
 
-        public abstract PooledObject GetPooledObject();
+        public abstract PooledObject PoolObject();
+        public abstract void ReleasePooledObject(PooledObject objectToRelease);
+        public abstract void Clear();
     }   
 }

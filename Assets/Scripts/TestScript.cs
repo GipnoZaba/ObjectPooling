@@ -1,11 +1,10 @@
 ﻿using ObjectPooling;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
     [SerializeField] private GameObject _projectilePrefab;
-    
+
     private void Start()
     {
         Pooling.Get(_projectilePrefab);
@@ -13,8 +12,12 @@ public class TestScript : MonoBehaviour
         Pooling.Get(_projectilePrefab);
         Pooling.Get(_projectilePrefab);
         Pooling.Get(_projectilePrefab);
+        Pooling.Get(_projectilePrefab);
+        Pooling.Get(_projectilePrefab);
+        Pooling.Get(_projectilePrefab);
+        Pooling.ClearPool(_projectilePrefab);
+        Pooling.ClearPool(_projectilePrefab);
         /*
-        GameObject projectile = Pooling.Get(_projectilePrefab);
         Pooling.ClearPool(_projectilePrefab);
         Pooling.PopulatePool(_projectilePrefab, 10);
         Pooling.ClearPools();

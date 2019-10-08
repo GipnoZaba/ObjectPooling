@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a60c8632-6d53-4776-8603-54fc26752b01" name="Default Changelist" comment="" />
+    <list default="true" id="a60c8632-6d53-4776-8603-54fc26752b01" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ObjectPoolingSytem/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ObjectPoolingSytem/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ObjectPoolingSytem/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ObjectPoolingSytem/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/DynamicSizePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/DynamicSizePool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/FixedSizePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/FixedSizePool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/PooledObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/PooledObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pooling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pooling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pools.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pools.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TestScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TestScript.cs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../Patterns/Service Locator/Assets/Scripts/PartOne/DependencyInjector.cs" root0="SKIP_HIGHLIGHTING" />
@@ -39,17 +53,18 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/ServiceLocating/ServiceLocator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/ObjectPool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/ObjectPools.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pooling.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pool.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/FixedSizePool.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pools.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pooling.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/PooledObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pools.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/FixedSizePool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/DynamicSizePool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TestScript.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1RjNgj2rssBNIQZ1v3VpdJF2kjL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
@@ -103,7 +118,8 @@
       <workItem from="1570430726338" duration="2239000" />
       <workItem from="1570484128144" duration="2521000" />
       <workItem from="1570522963955" duration="9844000" />
-      <workItem from="1570540728227" duration="905000" />
+      <workItem from="1570540728227" duration="2148000" />
+      <workItem from="1570547183988" duration="11950000" />
     </task>
     <servers />
   </component>
@@ -112,6 +128,19 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
   </component>

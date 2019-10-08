@@ -15,9 +15,6 @@
             <e p="Pooling.cs" t="Include" />
             <e p="Pools.cs" t="Include" />
           </e>
-          <e p="ServiceLocating" t="Include">
-            <e p="ServiceLocator.cs" t="Include" />
-          </e>
           <e p="TestScript.cs" t="Include" />
         </e>
       </e>

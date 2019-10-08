@@ -6,9 +6,64 @@ namespace ObjectPooling
     {
         private static readonly Pools _Pools = new Pools();
 
-        public static PooledObject Get(GameObject objectToPool)
+        #region Get overloads
+        public static PooledObject Get(GameObject objectToPool, Vector3 position, Quaternion rotation, Transform parent = null)
         {
-            return _Pools.GetPooledObject(objectToPool);
+            PooledObject pooledObject = _Pools.GetPooledObject(objectToPool);
+
+            pooledObject.ObjectInScene.transform.parent = parent;
+            if (parent == null)
+            {
+                pooledObject.ObjectInScene.transform.position = position;
+                pooledObject.ObjectInScene.transform.rotation = rotation;
+            }
+            else
+            {
+                pooledObject.ObjectInScene.transform.localPosition = position;
+                pooledObject.ObjectInScene.transform.localRotation = rotation;
+            }
+
+            return pooledObject;
+        }
+
+        public static PooledObject Get(GameObject objectToPool, Transform parent = null)
+        {
+            return Get(objectToPool, objectToPool.transform.position, objectToPool.transform.rotation, parent);
+        }
+
+        public static PooledObject Get(GameObject objectToPool, Transform parent, bool inWorldSpace)
+        {
+            PooledObject pooledObject = _Pools.GetPooledObject(objectToPool);
+
+            pooledObject.ObjectInScene.transform.parent = parent;
+            if (parent != null && inWorldSpace == false)
+            {
+                pooledObject.ObjectInScene.transform.localPosition = objectToPool.transform.position;
+                pooledObject.ObjectInScene.transform.localRotation = objectToPool.transform.rotation;
+            }
+            else
+            {
+                pooledObject.ObjectInScene.transform.position = objectToPool.transform.position;
+                pooledObject.ObjectInScene.transform.rotation = objectToPool.transform.rotation;
+            }
+
+            return pooledObject;
+        }
+        #endregion
+
+        public static void Release(PooledObject objectToRelease)
+        {
+            _Pools.ReleasePooledObject(objectToRelease);
+        }
+
+        public static void ClearPool(GameObject objectKeyToPool)
+        {
+            _Pools.ClearPool(objectKeyToPool);
+        }
+        
+        public static void ClearPool(PooledObject objectKeyToPool)
+        {
+            _Pools.ClearPool(objectKeyToPool);
         }
     }
 }
