@@ -57,5 +57,10 @@ namespace ObjectPooling
                 _objectsInPool[i].SelfDestruct();
             }
         }
+
+        public override void Populate(int amount)
+        {
+            
+        }
     }
 }

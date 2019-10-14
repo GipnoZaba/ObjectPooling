@@ -14,6 +14,7 @@
             <e p="PooledObject.cs" t="Include" />
             <e p="Pooling.cs" t="Include" />
             <e p="Pools.cs" t="Include" />
+            <e p="PoolSettings.cs" t="Include" />
           </e>
           <e p="TestScript.cs" t="Include" />
         </e>

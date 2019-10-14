@@ -65,5 +65,20 @@ namespace ObjectPooling
         {
             _Pools.ClearPool(objectKeyToPool);
         }
+
+        public static void PopulatePool(GameObject objectKeyToPool, int amount)
+        {
+            _Pools.PopulatePool(objectKeyToPool, amount);
+        }
+        
+        public static void PopulatePool(PooledObject objectKeyToPool, int amount)
+        {
+            _Pools.PopulatePool(objectKeyToPool, amount);
+        }
+
+        public static void InitPool(GameObject objectToPool, int amount = 0, PoolType poolType = PoolType.DynamicSize)
+        {
+            _Pools.CreatePool(objectToPool, amount, poolType);
+        }
     }
 }

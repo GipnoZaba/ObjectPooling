@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace ObjectPooling
@@ -15,35 +17,18 @@ namespace ObjectPooling
 
         public void ReleasePooledObject(PooledObject objectToRelease)
         {
-            _objectToPoolMap.TryGetValue(objectToRelease.Prefab, out var outPool);
-
-            if (outPool == null)
+            if (IsObjectMapped(objectToRelease.Prefab, out var outPool) == false)
             {
-                Debug.LogError("Trying to release object from non-existing pool");
+                Debug.LogWarning("Trying to release object from non-existing pool");
                 return;
             }
             
             outPool.ReleasePooledObject(objectToRelease);
         }
 
-        private Pool GetPool(GameObject keyGameObject)
-        {
-            _objectToPoolMap.TryGetValue(keyGameObject, out var outPool);
-
-            if (outPool == null)
-            {
-                outPool = new DynamicSizePool(keyGameObject, 5);
-                _objectToPoolMap.Add(keyGameObject, outPool);
-            }
-
-            return outPool;
-        }
-        
         public void ClearPool(GameObject objectKeyToPool)
         {
-            _objectToPoolMap.TryGetValue(objectKeyToPool, out var outPool);
-
-            if (outPool != null)
+            if (IsObjectMapped(objectKeyToPool, out var outPool))
             {
                 outPool.Clear();
             }
@@ -51,10 +36,89 @@ namespace ObjectPooling
         
         public void ClearPool(PooledObject objectKeyToPool)
         {
-            _objectToPoolMap.TryGetValue(objectKeyToPool.Prefab, out var outPool);
-
-            outPool?.Clear();
+            if (!IsObjectMapped(objectKeyToPool.Prefab, out var outPool))
+            {
+                return;
+            }
+            
+            outPool.Clear();
             _objectToPoolMap.Remove(objectKeyToPool.Prefab);
+        }
+
+        public void PopulatePool(GameObject objectKeyToPool, int amount)
+        {
+            if (IsObjectMapped(objectKeyToPool, out var outPool))
+            {
+                outPool.Populate(amount);
+            }
+        }
+        
+        public void PopulatePool(PooledObject objectKeyToPool, int amount)
+        {
+            if (IsObjectMapped(objectKeyToPool, out var outPool))
+            {
+                outPool.Populate(amount);
+            }
+        }
+
+        public Pool CreatePool(GameObject keyGameObject, int startCapacity = 0, PoolType poolType = PoolType.DynamicSize)
+        {
+            if (IsObjectMapped(keyGameObject, out var pool))
+            {
+                Debug.LogWarning("Trying to create pool for object that is already being pulled");
+                return pool;
+            }
+            
+            switch (poolType)
+            {
+                case PoolType.FixedSize:
+                    pool = new FixedSizePool(keyGameObject, startCapacity);
+                    break;
+                case PoolType.DynamicSize:
+                    pool = new DynamicSizePool(keyGameObject, startCapacity);
+                    break;
+                case PoolType.FixedSizeReusable:
+                    pool = new DynamicSizePool(keyGameObject, startCapacity); // todo
+                    break;
+                case PoolType.DynamicSizeReusable:
+                    pool = new DynamicSizePool(keyGameObject, startCapacity); // todo
+                    break;
+                default:
+                    pool = new DynamicSizePool(keyGameObject, startCapacity);
+                    break;
+            }
+
+            _objectToPoolMap.Add(keyGameObject, pool);
+            return pool;
+        }
+
+        private Pool CreateDefaultPool(GameObject keyGameObject)
+        {
+            var newPool = new DynamicSizePool(keyGameObject, 0);
+            _objectToPoolMap.Add(keyGameObject, newPool);
+            return newPool;
+        }
+        
+        private Pool GetPool(GameObject keyGameObject)
+        {
+            if (IsObjectMapped(keyGameObject, out var outPool) == false)
+            {
+                outPool = CreateDefaultPool(keyGameObject);
+            }
+
+            return outPool;
+        }
+        
+        private bool IsObjectMapped(GameObject objectKeyToPool, out Pool pool)
+        {
+            _objectToPoolMap.TryGetValue(objectKeyToPool, out pool);
+            return pool != null;
+        }
+        
+        private bool IsObjectMapped(PooledObject objectKeyToPool, out Pool pool)
+        {
+            _objectToPoolMap.TryGetValue(objectKeyToPool.Prefab, out pool);
+            return pool != null;
         }
     }   
 }
