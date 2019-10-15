@@ -18,7 +18,7 @@ namespace ObjectPooling
         {
             for (int i = 0; i < size; i++)
             {
-                _objectsInPool[i] = new PooledObject(Object.Instantiate(objectToPool), objectToPool);
+                _objectsInPool[i] = CreatePooledObject(objectToPool);
                 _objectsInPool[i].Index = i;
             }
         }
@@ -60,7 +60,12 @@ namespace ObjectPooling
 
         public override void Populate(int amount)
         {
-            
+            Debug.LogWarning("Trying to populate fixed size pool");
+        }
+
+        protected override GameObject GetObjectPrefab()
+        {
+            return _objectsInPool[0].Prefab;
         }
     }
 }

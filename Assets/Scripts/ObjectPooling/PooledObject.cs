@@ -14,6 +14,7 @@ namespace ObjectPooling
         {
             Prefab = prefab;
             _objectInScene = objectToPool;
+            _objectInScene.SetActive(false);
         }
 
         public PooledObject ReturnToPool()

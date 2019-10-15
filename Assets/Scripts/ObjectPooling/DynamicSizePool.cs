@@ -8,10 +8,11 @@ namespace ObjectPooling
     {
         private readonly List<PooledObject> _objectsInPool;
 
-        public DynamicSizePool(GameObject objectToPool, int size)
+        public DynamicSizePool(GameObject objectToPool, int size, int maxSize = -1)
         {
             _firstUnusedObjectIndex = 0;
             _objectsInPool = new PooledObject[size].ToList();
+            _maxPoolSize = maxSize;
             InitializePoolDefaultValues(objectToPool, size);
         }
 
@@ -19,7 +20,7 @@ namespace ObjectPooling
         {
             for (int i = 0; i < size; i++)
             {
-                _objectsInPool[i] = new PooledObject(Object.Instantiate(objectToPool), objectToPool);
+                _objectsInPool[i] = CreatePooledObject(objectToPool);
                 _objectsInPool[i].Index = i;
             }
         }
@@ -28,7 +29,7 @@ namespace ObjectPooling
         {
             if (_firstUnusedObjectIndex == _objectsInPool.Count)
             {
-                _objectsInPool.Add(new PooledObject(Object.Instantiate(_objectsInPool[0].Prefab), _objectsInPool[0].Prefab));
+                _objectsInPool.Add(CreatePooledObject(GetObjectPrefab()));
             }
             
             var firstFreeObject = _objectsInPool[_firstUnusedObjectIndex++];
@@ -57,10 +58,24 @@ namespace ObjectPooling
                 _objectsInPool[i].SelfDestruct();
             }
         }
+
+        protected override GameObject GetObjectPrefab()
+        {
+            return _objectsInPool[0].Prefab;
+        }
         
         public override void Populate(int amount)
         {
-            
+            for (int i = 0; i < amount; i++)
+            {
+                if (_objectsInPool.Count == _maxPoolSize)
+                {
+                    Debug.LogWarning("Pool maximum capacity reached");
+                    return;
+                }
+                
+                _objectsInPool.Add(CreatePooledObject(GetObjectPrefab()));
+            }
         }
     }
 }
