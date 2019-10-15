@@ -7,12 +7,11 @@ public class TestScript : MonoBehaviour
 
     private void Start()
     {
-        Pooling.InitPool(_projectilePrefab, 2);
+        Pooling.InitPool(_projectilePrefab, 2, PoolType.FixedSize);
         Pooling.PopulatePool(_projectilePrefab, 3);
-
+        Pooling.GetRange(_projectilePrefab, 2);
+        Pooling.GetRange(_projectilePrefab, 5);
         /*
-        Pooling.ClearPools();
-        Pooling.GetRange(_projectilePrefab, 10);
         Pooling.GetAllPools();
         Pooling.GetPoolCapacity(_projectilePrefab);
         Pooling.GetPoolUsedObjectsCount(_projectilePrefab);

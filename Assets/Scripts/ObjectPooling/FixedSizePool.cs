@@ -6,10 +6,12 @@ namespace ObjectPooling
     {
 
         private readonly PooledObject[] _objectsInPool;
-
+        protected override int FreeObjectsCount { get => _maxPoolSize - _firstUnusedObjectIndex; }
+        
         public FixedSizePool(GameObject objectToPool, int size)
         {
             _firstUnusedObjectIndex = 0;
+            _maxPoolSize = size;
             _objectsInPool = new PooledObject[size];
             InitializePoolDefaultValues(objectToPool, size);
         }
@@ -22,19 +24,36 @@ namespace ObjectPooling
                 _objectsInPool[i].Index = i;
             }
         }
-
-        public override PooledObject PoolObject()
+        
+        public override PooledObject GetPooledObject()
         {
             if (_firstUnusedObjectIndex >= _objectsInPool.Length)
             {
                 Debug.LogError("No available objects");
                 return null;
             }
-            
+
             var firstFreeObject = _objectsInPool[_firstUnusedObjectIndex++];
             firstFreeObject.GetPooled();
 
             return firstFreeObject;
+        }
+
+        public override PooledObject[] GetRange(int amount)
+        {
+            if (FreeObjectsCount >= amount)
+            {
+                PooledObject[] pooledObjects = new PooledObject[amount];
+                for (int i = 0; i < amount; i++)
+                {
+                    pooledObjects[i] = GetPooledObject();
+                }
+
+                return pooledObjects;
+            }
+            
+            Debug.LogWarning("Not enough free objects in pool");
+            return null;
         }
 
         public override void ReleasePooledObject(PooledObject objectToRelease)

@@ -51,9 +51,24 @@ namespace ObjectPooling
         }
         #endregion
 
+        public static PooledObject[] GetRange(GameObject objectToPool, int amount)
+        {
+            return _Pools.GetRange(objectToPool, amount);
+        }
+        
+        public static PooledObject[] GetRange(PooledObject objectToPool, int amount)
+        {
+            return _Pools.GetRange(objectToPool, amount);
+        }
+        
         public static void Release(PooledObject objectToRelease)
         {
             _Pools.ReleasePooledObject(objectToRelease);
+        }
+
+        public static void ClearPools()
+        {
+            _Pools.ClearPools();
         }
 
         public static void ClearPool(GameObject objectKeyToPool)

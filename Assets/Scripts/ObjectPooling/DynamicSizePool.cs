@@ -7,6 +7,7 @@ namespace ObjectPooling
     public class DynamicSizePool : Pool
     {
         private readonly List<PooledObject> _objectsInPool;
+        protected override int FreeObjectsCount { get => _objectsInPool.Count - _firstUnusedObjectIndex; }
 
         public DynamicSizePool(GameObject objectToPool, int size, int maxSize = -1)
         {
@@ -25,7 +26,7 @@ namespace ObjectPooling
             }
         }
 
-        public override PooledObject PoolObject()
+        public override PooledObject GetPooledObject()
         {
             if (_firstUnusedObjectIndex == _objectsInPool.Count)
             {
@@ -36,6 +37,17 @@ namespace ObjectPooling
             firstFreeObject.GetPooled();
             
             return firstFreeObject;
+        }
+        
+        public override PooledObject[] GetRange(int amount)
+        {
+            PooledObject[] pooledObjects = new PooledObject[amount];
+            for (int i = 0; i < amount; i++)
+            {
+                pooledObjects[i] = GetPooledObject();
+            }
+
+            return pooledObjects;
         }
 
         public override void ReleasePooledObject(PooledObject objectToRelease)

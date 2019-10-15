@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace ObjectPooling
@@ -12,7 +10,22 @@ namespace ObjectPooling
         
         public PooledObject GetPooledObject(GameObject objectToPool)
         {
-            return GetPool(objectToPool).PoolObject();
+            return GetPool(objectToPool).GetPooledObject();
+        }
+
+        public PooledObject[] GetRange(GameObject objectToPool, int amount)
+        {
+            if (IsObjectMapped(objectToPool, out var outPool))
+            {
+                return outPool.GetRange(amount);
+            }
+
+            return new PooledObject[0];
+        }
+        
+        public PooledObject[] GetRange(PooledObject objectToPool, int amount)
+        {
+            return GetRange(objectToPool.Prefab, amount);
         }
 
         public void ReleasePooledObject(PooledObject objectToRelease)
@@ -26,23 +39,28 @@ namespace ObjectPooling
             outPool.ReleasePooledObject(objectToRelease);
         }
 
+        public void ClearPools()
+        {
+            foreach(var elem in _objectToPoolMap)
+            {
+                elem.Value.Clear();
+            }
+            
+            _objectToPoolMap.Clear();
+        }
+        
         public void ClearPool(GameObject objectKeyToPool)
         {
             if (IsObjectMapped(objectKeyToPool, out var outPool))
             {
                 outPool.Clear();
+                _objectToPoolMap.Remove(objectKeyToPool);
             }
         }
         
         public void ClearPool(PooledObject objectKeyToPool)
         {
-            if (!IsObjectMapped(objectKeyToPool.Prefab, out var outPool))
-            {
-                return;
-            }
-            
-            outPool.Clear();
-            _objectToPoolMap.Remove(objectKeyToPool.Prefab);
+            ClearPool(objectKeyToPool.Prefab);
         }
 
         public void PopulatePool(GameObject objectKeyToPool, int amount)
@@ -55,10 +73,7 @@ namespace ObjectPooling
         
         public void PopulatePool(PooledObject objectKeyToPool, int amount)
         {
-            if (IsObjectMapped(objectKeyToPool, out var outPool))
-            {
-                outPool.Populate(amount);
-            }
+            PopulatePool(objectKeyToPool.Prefab, amount);
         }
 
         public Pool CreatePool(GameObject keyGameObject, int startCapacity = 0, PoolType poolType = PoolType.DynamicSize)
@@ -117,8 +132,7 @@ namespace ObjectPooling
         
         private bool IsObjectMapped(PooledObject objectKeyToPool, out Pool pool)
         {
-            _objectToPoolMap.TryGetValue(objectKeyToPool.Prefab, out pool);
-            return pool != null;
+            return IsObjectMapped(objectKeyToPool.Prefab, out pool);
         }
     }   
 }

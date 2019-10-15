@@ -6,8 +6,10 @@ namespace ObjectPooling
     {
         protected int _firstUnusedObjectIndex;
         protected int _maxPoolSize;
+        protected abstract int FreeObjectsCount { get; }
         
-        public abstract PooledObject PoolObject();
+        public abstract PooledObject GetPooledObject();
+        public abstract PooledObject[] GetRange(int amount);
         public abstract void ReleasePooledObject(PooledObject objectToRelease);
         public abstract void Clear();
         public abstract void Populate(int amount);

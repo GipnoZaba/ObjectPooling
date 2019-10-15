@@ -6,7 +6,8 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/DynamicSizePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/DynamicSizePool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/FixedSizePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/FixedSizePool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/PooledObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/PooledObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pooling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pooling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pools.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pools.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/TestScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TestScript.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,9 +52,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/ObjectPool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/ObjectPools.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/PoolSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/PooledObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pooling.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pools.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/PooledObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/Pool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/FixedSizePool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ObjectPooling/DynamicSizePool.cs" />
@@ -123,6 +124,8 @@
       <workItem from="1570547183988" duration="12634000" />
       <workItem from="1571057304560" duration="6094000" />
       <workItem from="1571145284979" duration="1722000" />
+      <workItem from="1571147159991" duration="1491000" />
+      <workItem from="1571163062900" duration="2466000" />
     </task>
     <servers />
   </component>
