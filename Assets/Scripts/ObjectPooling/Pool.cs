@@ -6,7 +6,10 @@ namespace ObjectPooling
     {
         protected int _firstUnusedObjectIndex;
         protected int _maxPoolSize;
-        protected abstract int FreeObjectsCount { get; }
+        
+        public abstract int Capacity { get; }
+        public abstract int FreeObjectsCount { get; }
+        public abstract int UsedObjectsCount { get; }
         
         public abstract PooledObject GetPooledObject();
         public abstract PooledObject[] GetRange(int amount);

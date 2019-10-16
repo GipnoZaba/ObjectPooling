@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityScript.Scripting.Pipeline;
 
 namespace ObjectPooling
 {
     public class Pools
     {
-        
         private readonly Dictionary<GameObject, Pool> _objectToPoolMap = new Dictionary<GameObject, Pool>();
         
         public PooledObject GetPooledObject(GameObject objectToPool)
@@ -21,11 +21,6 @@ namespace ObjectPooling
             }
 
             return new PooledObject[0];
-        }
-        
-        public PooledObject[] GetRange(PooledObject objectToPool, int amount)
-        {
-            return GetRange(objectToPool.Prefab, amount);
         }
 
         public void ReleasePooledObject(PooledObject objectToRelease)
@@ -57,11 +52,6 @@ namespace ObjectPooling
                 _objectToPoolMap.Remove(objectKeyToPool);
             }
         }
-        
-        public void ClearPool(PooledObject objectKeyToPool)
-        {
-            ClearPool(objectKeyToPool.Prefab);
-        }
 
         public void PopulatePool(GameObject objectKeyToPool, int amount)
         {
@@ -69,11 +59,6 @@ namespace ObjectPooling
             {
                 outPool.Populate(amount);
             }
-        }
-        
-        public void PopulatePool(PooledObject objectKeyToPool, int amount)
-        {
-            PopulatePool(objectKeyToPool.Prefab, amount);
         }
 
         public Pool CreatePool(GameObject keyGameObject, int startCapacity = 0, PoolType poolType = PoolType.DynamicSize)
@@ -105,6 +90,49 @@ namespace ObjectPooling
 
             _objectToPoolMap.Add(keyGameObject, pool);
             return pool;
+        }
+
+        public int GetPoolCapacity(GameObject keyGameObject)
+        {
+            if (IsObjectMapped(keyGameObject, out var pool))
+            {
+                return pool.Capacity;
+            }
+
+            Debug.LogWarning("Trying to get capacity of non-existent pool");
+            return 0;
+        }
+
+        public int GetPoolUsedObjectsCount(GameObject keyGameObject)
+        {
+            if (IsObjectMapped(keyGameObject, out var pool))
+            {
+                return pool.UsedObjectsCount;
+            }
+
+            Debug.LogWarning("Trying to get used objects count of non-existent pool");
+            return 0;
+        }
+        
+        public int GetPoolUsedObjectsCount(PooledObject keyGameObject)
+        {
+            return GetPoolUsedObjectsCount(keyGameObject.Prefab);
+        }
+        
+        public int GetPoolUnusedObjectsCount(GameObject keyGameObject)
+        {
+            if (IsObjectMapped(keyGameObject, out var pool))
+            {
+                return pool.FreeObjectsCount;
+            }
+
+            Debug.LogWarning("Trying to get unused objects count of non-existent pool");
+            return 0;
+        }
+        
+        public int GetPoolUnusedObjectsCount(PooledObject keyGameObject)
+        {
+            return GetPoolUnusedObjectsCount(keyGameObject.Prefab);
         }
 
         private Pool CreateDefaultPool(GameObject keyGameObject)

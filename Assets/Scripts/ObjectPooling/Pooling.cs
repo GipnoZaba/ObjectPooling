@@ -58,7 +58,7 @@ namespace ObjectPooling
         
         public static PooledObject[] GetRange(PooledObject objectToPool, int amount)
         {
-            return _Pools.GetRange(objectToPool, amount);
+            return GetRange(objectToPool.Prefab, amount);
         }
         
         public static void Release(PooledObject objectToRelease)
@@ -78,7 +78,7 @@ namespace ObjectPooling
         
         public static void ClearPool(PooledObject objectKeyToPool)
         {
-            _Pools.ClearPool(objectKeyToPool);
+            ClearPool(objectKeyToPool.Prefab);
         }
 
         public static void PopulatePool(GameObject objectKeyToPool, int amount)
@@ -88,12 +88,42 @@ namespace ObjectPooling
         
         public static void PopulatePool(PooledObject objectKeyToPool, int amount)
         {
-            _Pools.PopulatePool(objectKeyToPool, amount);
+            PopulatePool(objectKeyToPool.Prefab, amount);
         }
 
         public static void InitPool(GameObject objectToPool, int amount = 0, PoolType poolType = PoolType.DynamicSize)
         {
             _Pools.CreatePool(objectToPool, amount, poolType);
+        }
+
+        public static int GetPoolCapacity(GameObject objectKeyToPool)
+        {
+            return _Pools.GetPoolCapacity(objectKeyToPool);
+        }
+        
+        public static int GetPoolCapacity(PooledObject objectKeyToPool)
+        {
+            return GetPoolCapacity(objectKeyToPool.Prefab);
+        }
+
+        public static int GetPoolUsedObjectsCount(GameObject objectKeyToPool)
+        {
+            return _Pools.GetPoolUsedObjectsCount(objectKeyToPool);
+        }
+        
+        public static int GetPoolUsedObjectsCount(PooledObject objectKeyToPool)
+        {
+            return GetPoolUsedObjectsCount(objectKeyToPool.Prefab);
+        }
+        
+        public static int GetPoolUnusedObjectsCount(GameObject objectKeyToPool)
+        {
+            return _Pools.GetPoolUnusedObjectsCount(objectKeyToPool);
+        }
+        
+        public static int GetPoolUnusedObjectsCount(PooledObject objectKeyToPool)
+        {
+            return GetPoolUnusedObjectsCount(objectKeyToPool.Prefab);
         }
     }
 }

@@ -6,8 +6,10 @@ namespace ObjectPooling
     {
 
         private readonly PooledObject[] _objectsInPool;
-        protected override int FreeObjectsCount { get => _maxPoolSize - _firstUnusedObjectIndex; }
-        
+        public override int Capacity => _maxPoolSize;
+        public override int UsedObjectsCount => _firstUnusedObjectIndex;
+        public override int FreeObjectsCount => _maxPoolSize - _firstUnusedObjectIndex;
+
         public FixedSizePool(GameObject objectToPool, int size)
         {
             _firstUnusedObjectIndex = 0;
