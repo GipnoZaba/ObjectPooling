@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ObjectPooling
 {
+    [Serializable]
     public class FixedSizePool : Pool
     {
-
         private readonly PooledObject[] _objectsInPool;
         public override int Capacity => _maxPoolSize;
         public override int UsedObjectsCount => _firstUnusedObjectIndex;
