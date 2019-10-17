@@ -9,6 +9,8 @@ public class ExtendedEditorWindow : EditorWindow
     protected string _selectedPropertyPath;
     protected SerializedProperty _selectedProperty;
     
+    
+    
     protected void DrawProperties(SerializedProperty property, bool isDrawChildren)
     {
         string lastPropertyPath = string.Empty;
@@ -42,12 +44,19 @@ public class ExtendedEditorWindow : EditorWindow
 
     protected void DrawSidebar(SerializedProperty property)
     {
+        Color defaultColor = GUI.backgroundColor;
         foreach (SerializedProperty p in property)
         {
+            if (_selectedPropertyPath == p.propertyPath)
+            {
+                GUI.backgroundColor = Color.cyan;
+            }
             if (GUILayout.Button(p.displayName))
             {
                 _selectedPropertyPath = p.propertyPath;
             }
+
+            GUI.backgroundColor = defaultColor;
         }
 
         if (!string.IsNullOrEmpty(_selectedPropertyPath))

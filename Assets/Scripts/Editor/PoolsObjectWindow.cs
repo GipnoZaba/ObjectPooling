@@ -2,18 +2,17 @@
 using UnityEditor;
 using UnityEngine;
 
-public class PoolsEditorWindow : ExtendedEditorWindow
+public class PoolsObjectWindow : ExtendedEditorWindow
 {
-
-    public static void Open(ObjectPools poolingSystem)
+    public static void Open(PoolsObject pools)
     {
-        PoolsEditorWindow window = GetWindow<PoolsEditorWindow>();
-        window._serializedObject = new SerializedObject(poolingSystem);
+        PoolsObjectWindow windows = GetWindow<PoolsObjectWindow>();
+        windows._serializedObject = new SerializedObject(pools);
     }
 
     private void OnGUI()
     {
-        _currentProperty = _serializedObject.FindProperty("_fixedSizePool");
+        _currentProperty = _serializedObject.FindProperty("_pools");
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));

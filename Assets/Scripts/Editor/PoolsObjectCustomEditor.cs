@@ -8,25 +8,25 @@ public class AssetHandler
     [OnOpenAsset]
     public static bool OpenEditor(int instanceId, int line)
     {
-        ObjectPools obj = EditorUtility.InstanceIDToObject(instanceId) as ObjectPools;
+        PoolsObject obj = EditorUtility.InstanceIDToObject(instanceId) as PoolsObject;
         
         if (obj != null)
         {
-            PoolsEditorWindow.Open(obj);
+            PoolsObjectWindow.Open(obj);
         }
 
         return false;
     }
 }
 
-[CustomEditor(typeof(ObjectPools))]
-public class PoolsCustomEditor : Editor
+[CustomEditor(typeof(PoolsObject))]
+public class PoolsObjectCustomEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         if (GUILayout.Button("Open editor"))
         {
-            PoolsEditorWindow.Open((ObjectPools) target);
+            PoolsObjectWindow.Open((PoolsObject) target);
         }
         
         base.OnInspectorGUI();
