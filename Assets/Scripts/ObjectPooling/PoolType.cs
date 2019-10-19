@@ -1,5 +1,8 @@
-﻿namespace ObjectPooling
+﻿using System;
+
+namespace ObjectPooling
 {
+    [Serializable]
     public enum PoolType{
         FixedSize,
         DynamicSize,

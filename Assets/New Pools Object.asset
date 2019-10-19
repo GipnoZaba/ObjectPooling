@@ -13,8 +13,21 @@ MonoBehaviour:
   m_Name: New Pools Object
   m_EditorClassIdentifier: 
   _pools:
-  - _poolType: 0
-  - _poolType: 0
-  - _poolType: 0
-  - _poolType: 0
-  - _poolType: 0
+  - _poolName: 
+    _poolType: 1
+    _maxSize: 0
+  - _poolName: 
+    _poolType: 0
+    _maxSize: 0
+  - _poolName: 
+    _poolType: 2
+    _maxSize: 0
+  - _poolName: 
+    _poolType: 0
+    _maxSize: 0
+  - _poolName: 
+    _poolType: 0
+    _maxSize: 0
+  - _poolName: 
+    _poolType: 3
+    _maxSize: 0

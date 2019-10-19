@@ -8,9 +8,7 @@ public class ExtendedEditorWindow : EditorWindow
 
     protected string _selectedPropertyPath;
     protected SerializedProperty _selectedProperty;
-    
-    
-    
+
     protected void DrawProperties(SerializedProperty property, bool isDrawChildren)
     {
         string lastPropertyPath = string.Empty;

@@ -1,9 +1,15 @@
-﻿using ObjectPooling;
+﻿using System;
+using ObjectPooling;
 using UnityEditor;
 using UnityEngine;
 
 public class PoolsObjectWindow : ExtendedEditorWindow
 {
+
+    private const string PoolNameName = "_poolName";
+    private const string PoolTypeName = "_poolType";
+    private const string MaxSizeName = "_maxSize";
+    
     public static void Open(PoolsObject pools)
     {
         PoolsObjectWindow windows = GetWindow<PoolsObjectWindow>();
@@ -24,7 +30,7 @@ public class PoolsObjectWindow : ExtendedEditorWindow
 
         if (_selectedProperty != null)
         {
-            DrawProperties(_selectedProperty, true);
+            DrawSelectedPropertiesPanel();
         }
         else
         {
@@ -39,13 +45,40 @@ public class PoolsObjectWindow : ExtendedEditorWindow
 
     private void DrawSelectedPropertiesPanel()
     {
+        EditorGUIUtility.labelWidth = 75f;
+        
         _currentProperty = _selectedProperty;
         
         EditorGUILayout.BeginVertical("box");
-        /*
-        DrawField("maxSize", true);
-        DrawField("prefab", true);
-        */
+        
+        DrawPoolSettings();
+
         EditorGUILayout.EndVertical();
+    }
+
+    private void DrawPoolSettings()
+    {
+        DrawField(PoolTypeName, true);
+        
+        int poolTypeIndex = _selectedProperty.FindPropertyRelative(PoolTypeName).enumValueIndex;
+        
+        switch ((PoolType) poolTypeIndex)
+        {
+            case PoolType.FixedSize:
+                DrawFixedSizePool();
+                break;
+            case PoolType.DynamicSize:
+                break;
+            case PoolType.FixedSizeReusable:
+                break;
+            case PoolType.DynamicSizeReusable:
+                break;
+        }
+    }
+
+    private void DrawFixedSizePool()
+    {
+        DrawField(PoolNameName, true);
+        DrawField(MaxSizeName, true);
     }
 }
