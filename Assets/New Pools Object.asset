@@ -14,20 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pools:
   - _poolName: 
-    _poolType: 1
+    _poolType: 0
+    _objectPrefab: {fileID: 0}
+    _startSize: 0
     _maxSize: 0
   - _poolName: 
     _poolType: 0
+    _objectPrefab: {fileID: 0}
+    _startSize: 0
     _maxSize: 0
   - _poolName: 
     _poolType: 2
+    _objectPrefab: {fileID: 0}
+    _startSize: 0
     _maxSize: 0
   - _poolName: 
     _poolType: 0
+    _objectPrefab: {fileID: 0}
+    _startSize: 0
     _maxSize: 0
   - _poolName: 
     _poolType: 0
+    _objectPrefab: {fileID: 0}
+    _startSize: 0
     _maxSize: 0
   - _poolName: 
     _poolType: 3
+    _objectPrefab: {fileID: 0}
+    _startSize: 0
     _maxSize: 0

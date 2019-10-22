@@ -1,5 +1,4 @@
-﻿using System;
-using ObjectPooling;
+﻿using ObjectPooling;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +7,8 @@ public class PoolsObjectWindow : ExtendedEditorWindow
 
     private const string PoolNameName = "_poolName";
     private const string PoolTypeName = "_poolType";
+    private const string ObjectPrefabName = "_objectPrefab";
+    private const string StartSizeName = "_startSize";
     private const string MaxSizeName = "_maxSize";
     
     public static void Open(PoolsObject pools)
@@ -58,7 +59,10 @@ public class PoolsObjectWindow : ExtendedEditorWindow
 
     private void DrawPoolSettings()
     {
+        DrawField(PoolNameName, true);
         DrawField(PoolTypeName, true);
+        DrawField(ObjectPrefabName, true);
+        DrawField(StartSizeName, true);
         
         int poolTypeIndex = _selectedProperty.FindPropertyRelative(PoolTypeName).enumValueIndex;
         
@@ -78,7 +82,6 @@ public class PoolsObjectWindow : ExtendedEditorWindow
 
     private void DrawFixedSizePool()
     {
-        DrawField(PoolNameName, true);
         DrawField(MaxSizeName, true);
     }
 }
