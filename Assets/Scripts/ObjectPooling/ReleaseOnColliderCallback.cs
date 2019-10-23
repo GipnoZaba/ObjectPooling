@@ -2,7 +2,7 @@
 
 namespace ObjectPooling
 {
-    public class ReleaseOnCollisionCallback : ReleaseCallback
+    public class ReleaseOnColliderCallback : ReleaseCallback
     {
 
         public bool isTrigger;

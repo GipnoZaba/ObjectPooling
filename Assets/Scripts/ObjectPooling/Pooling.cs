@@ -1,10 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ObjectPooling
 {
     public class Pooling : MonoBehaviour
-    {
+    { 
+      
+        [SerializeField] private PoolsObject[] _initialPools;
+        
         private static readonly Pools _Pools = new Pools();
+
+        private void Awake()
+        {
+            InitializePools();
+        }
+
+        private void InitializePools()
+        {
+            foreach (var poolsObject in _initialPools)
+            {
+                foreach (var pool in poolsObject.Pools)
+                {
+                    InitPool(pool);
+                }
+            }
+        }
 
         #region Get overloads
         public static PooledObject Get(GameObject objectToPool, Vector3 position, Quaternion rotation, Transform parent = null)
@@ -94,6 +114,11 @@ namespace ObjectPooling
         public static void InitPool(GameObject objectToPool, int amount = 0, PoolType poolType = PoolType.DynamicSize)
         {
             _Pools.CreatePool(objectToPool, amount, poolType);
+        }
+
+        public static void InitPool(PoolObject poolObject)
+        {
+            _Pools.CreatePool(poolObject);
         }
 
         public static int GetPoolCapacity(GameObject objectKeyToPool)

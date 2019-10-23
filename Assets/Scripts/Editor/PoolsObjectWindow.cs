@@ -10,6 +10,7 @@ public class PoolsObjectWindow : ExtendedEditorWindow
     private const string ObjectPrefabName = "_objectPrefab";
     private const string StartSizeName = "_startSize";
     private const string MaxSizeName = "_maxSize";
+    private const string CallbackTypesName = "_callbackTypes";
     
     public static void Open(PoolsObject pools)
     {
@@ -63,6 +64,7 @@ public class PoolsObjectWindow : ExtendedEditorWindow
         DrawField(PoolTypeName, true);
         DrawField(ObjectPrefabName, true);
         DrawField(StartSizeName, true);
+        DrawField(CallbackTypesName, true);
         
         int poolTypeIndex = _selectedProperty.FindPropertyRelative(PoolTypeName).enumValueIndex;
         
@@ -82,6 +84,6 @@ public class PoolsObjectWindow : ExtendedEditorWindow
 
     private void DrawFixedSizePool()
     {
-        DrawField(MaxSizeName, true);
+        
     }
 }

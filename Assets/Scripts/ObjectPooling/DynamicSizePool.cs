@@ -11,13 +11,20 @@ namespace ObjectPooling
         public override int UsedObjectsCount => _firstUnusedObjectIndex;
         public override int FreeObjectsCount => _objectsInPool.Count - _firstUnusedObjectIndex;
 
-        public DynamicSizePool(GameObject objectToPool, int size, int maxSize = -1)
+        public DynamicSizePool(GameObject objectToPool, int size, int maxSize, List<ReleaseCallbackType> releaseCallbackTypes)
         {
             _firstUnusedObjectIndex = 0;
             _objectsInPool = new PooledObject[size].ToList();
             _maxPoolSize = maxSize;
+            _releaseCallbacks = new HashSet<ReleaseCallbackType>(releaseCallbackTypes);
             InitializePoolDefaultValues(objectToPool, size);
         }
+        
+        public DynamicSizePool(GameObject objectToPool, int size, int maxSize) : 
+            this(objectToPool, size, maxSize, new List<ReleaseCallbackType>()) { }
+        
+        public DynamicSizePool(GameObject objectToPool, int size) : 
+            this(objectToPool, size, -1) { }
 
         private void InitializePoolDefaultValues(GameObject objectToPool, int size)
         {

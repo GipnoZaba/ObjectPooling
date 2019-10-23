@@ -6,5 +6,6 @@ namespace ObjectPooling
     public class PoolsObject : ScriptableObject
     {
         [SerializeField] private PoolObject[] _pools;
+        public PoolObject[] Pools => _pools;
     }
 }

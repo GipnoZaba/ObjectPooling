@@ -9,7 +9,7 @@ namespace ObjectPooling
     {
         protected int _firstUnusedObjectIndex;
         protected int _maxPoolSize;
-        protected HashSet<ReleaseCallback> releaseCallbacks;
+        protected HashSet<ReleaseCallbackType> _releaseCallbacks;
         
         public abstract int Capacity { get; }
         public abstract int FreeObjectsCount { get; }
@@ -24,13 +24,37 @@ namespace ObjectPooling
 
         protected PooledObject CreatePooledObject(GameObject objectToPool)
         {
-            GameObject gameObjectPooled = Object.Instantiate(objectToPool); 
+            GameObject gameObjectPooled = Object.Instantiate(objectToPool);
+
             PooledObject newPooledObject = new PooledObject(gameObjectPooled, objectToPool);
             
-            foreach (var releaseCallback in releaseCallbacks)
+            foreach (var type in _releaseCallbacks)
             {
-                ReleaseCallback callback = gameObjectPooled.AddComponent(releaseCallback.GetType()) as ReleaseCallback;
-                callback.pooledObject = newPooledObject;
+                ReleaseCallback callback;
+                
+                switch (type)
+                {
+                    case ReleaseCallbackType.None:
+                        break;
+                    case ReleaseCallbackType.OnCollision:
+                        callback = gameObjectPooled.AddComponent<ReleaseOnColliderCallback>();
+                        ReleaseOnColliderCallback onCollisionCallback = (ReleaseOnColliderCallback) callback;
+                        onCollisionCallback.isTrigger = false;
+                        callback.pooledObject = newPooledObject;
+                        break;
+                    case ReleaseCallbackType.OnCollision2D:
+                        break;
+                    case ReleaseCallbackType.OnTrigger:
+                        callback = gameObjectPooled.AddComponent<ReleaseOnColliderCallback>();
+                        ReleaseOnColliderCallback onTriggerCallback = (ReleaseOnColliderCallback) callback;
+                        onTriggerCallback.isTrigger = true;
+                        callback.pooledObject = newPooledObject;
+                        break;
+                    case ReleaseCallbackType.OnTrigger2D:
+                        break;
+                    case ReleaseCallbackType.OnDestroy:
+                        break;
+                }
             }
 
             return newPooledObject;

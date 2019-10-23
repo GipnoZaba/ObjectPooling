@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ObjectPooling
@@ -11,13 +12,16 @@ namespace ObjectPooling
         public override int UsedObjectsCount => _firstUnusedObjectIndex;
         public override int FreeObjectsCount => _maxPoolSize - _firstUnusedObjectIndex;
 
-        public FixedSizePool(GameObject objectToPool, int size)
+        public FixedSizePool(GameObject objectToPool, int size, List<ReleaseCallbackType> releaseCallbackTypes)
         {
             _firstUnusedObjectIndex = 0;
             _maxPoolSize = size;
             _objectsInPool = new PooledObject[size];
+            _releaseCallbacks = new HashSet<ReleaseCallbackType>(releaseCallbackTypes);
             InitializePoolDefaultValues(objectToPool, size);
         }
+        
+        public FixedSizePool(GameObject objectToPool, int size) : this(objectToPool, size, new List<ReleaseCallbackType>()) { }
 
         private void InitializePoolDefaultValues(GameObject objectToPool, int size)
         {
@@ -32,7 +36,7 @@ namespace ObjectPooling
         {
             if (_firstUnusedObjectIndex >= _objectsInPool.Length)
             {
-                Debug.LogError("No available objects");
+                Debug.LogWarning("No available objects");
                 return null;
             }
 

@@ -61,7 +61,7 @@ namespace ObjectPooling
             }
         }
 
-        public Pool CreatePool(GameObject keyGameObject, int startCapacity = 0, PoolType poolType = PoolType.DynamicSize)
+        public Pool CreatePool(GameObject keyGameObject, int startCapacity, PoolType poolType)
         {
             if (IsObjectMapped(keyGameObject, out var pool))
             {
@@ -89,6 +89,37 @@ namespace ObjectPooling
             }
 
             _objectToPoolMap.Add(keyGameObject, pool);
+            return pool;
+        }
+
+        public Pool CreatePool(PoolObject poolObject)
+        {
+            if (IsObjectMapped(poolObject.ObjectPrefab, out var pool))
+            {
+                Debug.LogWarning("Trying to create pool for object that is already being pulled");
+                return pool;
+            }
+            
+            switch (poolObject.PoolType)
+            {
+                case PoolType.FixedSize:
+                    pool = new FixedSizePool(poolObject.ObjectPrefab, poolObject.StartSize, poolObject.CallbackTypes);
+                    break;
+                case PoolType.DynamicSize:
+                    pool = new DynamicSizePool(poolObject.ObjectPrefab, poolObject.StartSize, poolObject.MaxSize, poolObject.CallbackTypes);
+                    break;
+                case PoolType.FixedSizeReusable:
+                    pool = new DynamicSizePool(poolObject.ObjectPrefab, poolObject.StartSize); // todo
+                    break;
+                case PoolType.DynamicSizeReusable:
+                    pool = new DynamicSizePool(poolObject.ObjectPrefab, poolObject.StartSize); // todo
+                    break;
+                default:
+                    pool = new DynamicSizePool(poolObject.ObjectPrefab, poolObject.StartSize);
+                    break;
+            }
+
+            _objectToPoolMap.Add(poolObject.ObjectPrefab, pool);
             return pool;
         }
 
